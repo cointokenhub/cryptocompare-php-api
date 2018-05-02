@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use CoinTokenHub\CryptoCompareApi\CryptoCompare;
+use CoinTokenHub\CryptoCompareApi\Coin;
 use CoinTokenHub\CryptoCompareApi\Exception\CryptoCompareException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
@@ -50,6 +51,20 @@ class CryptoCompareTest extends TestCase {
 		);
 	}
 
+	public function testRequestReturnsResponseWithParams()
+	{
+		$params = array(
+			"fsym" => "BTC",
+			"tsym" => "USD"
+		);
+
+		$mockResponse = file_get_contents(__DIR__ . '/Mock/CryptoCompareTest/coinsnapshot-api-btc-usd.txt');
+		$ccApi = new CryptoCompare($this->createHttpClientAndQueueResponse(200, $mockResponse));
+		$this->assertEquals(
+			json_decode($mockResponse),
+			$ccApi->request(Coin::COINSNAPSHOT_ENDPOINT, $params)
+		);
+	}
 
 	public function testRequestThrowsException()
 	{

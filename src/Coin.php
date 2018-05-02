@@ -1,7 +1,6 @@
 <?php
-namespace CoinTokenHub\CryptoCompareApi\Coin;
+namespace CoinTokenHub\CryptoCompareApi;
 
-use CoinTokenHub\CryptoCompareApi\CryptoCompare;
 use CoinTokenHub\CryptoCompareApi\Exception\CryptoCompareException;
 
 class Coin extends CryptoCompare
